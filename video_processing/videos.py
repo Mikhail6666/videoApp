@@ -2,8 +2,8 @@ from ultralytics import YOLO
 
 from video_processing.analyze_frames import analyze_frames
 from video_processing.extract_video_segments import extract_video_segments
+from settings import COMPLETE_FILES
 
-output_folder = '/home/mikhail/PycharmProjects/videoApp/complete_files'
 
 def process_and_stream_video(repo, video_file_id, complete_video_file_repository, complete_png_file_repository):
     model = YOLO("best.pt")
@@ -21,7 +21,7 @@ def process_and_stream_video(repo, video_file_id, complete_video_file_repository
         frame_result = analyze_frames(frame_number)
         extract_video_segments(video_file.file_path,
                                frame_result,
-                               output_folder,
+                               COMPLETE_FILES,
                                video_file_id,
                                complete_video_file_repository,
                                complete_png_file_repository)

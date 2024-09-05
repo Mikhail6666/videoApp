@@ -1,8 +1,6 @@
 import os
 import shutil
-
-# Путь для сохранения загруженных файлов
-UPLOAD_DIRECTORY = "/home/mikhail/PycharmProjects/videoApp/upload_files/"
+from settings import UPLOAD_DIRECTORY
 
 def create_file(file):
     try:
