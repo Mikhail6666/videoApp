@@ -1,6 +1,5 @@
 from typing import Annotated
 from fastapi import APIRouter, File, UploadFile, Depends, BackgroundTasks
-import multiprocessing
 from video_processing import process_and_stream_video, create_file
 from dependency import get_video_files_repository, get_complete_video_files_repository, get_complete_png_files_repository
 from repository import VideoFileRepository, CompleteFileRepository, CompletePngFileRepository
