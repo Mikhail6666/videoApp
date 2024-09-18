@@ -8,7 +8,7 @@ async def main_loop(folder_path, interval=10):
         # Сканируем директорию на наличие новых файлов
         scan_directory(folder_path)
         # Обрабатываем файлы
-        process_videos()
+        await process_videos()
         # Ждем интервал времени перед следующим сканированием
         # print(f"Waiting for {interval} seconds before next scan...")
         await asyncio.sleep(interval)

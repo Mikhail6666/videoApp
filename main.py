@@ -6,20 +6,20 @@ import asyncio
 from database_videos.main_loop import main_loop
 from settings import FOLDER_VIDEOS
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # Действия при старте приложения
-    folder_path = FOLDER_VIDEOS
-    asyncio.create_task(main_loop(folder_path))
-    print("Приложение запущено")
-    yield
-    print("Приложение завершено")
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     # Действия при старте приложения
+#     folder_path = FOLDER_VIDEOS
+#     asyncio.create_task(main_loop(folder_path))
+#     print("Приложение запущено")
+#     yield
+#     print("Приложение завершено")
+#
+#     # Действия при завершении приложения
+#     # Например, остановка задач, закрытие соединений и т.д.
 
-    # Действия при завершении приложения
-    # Например, остановка задач, закрытие соединений и т.д.
-
-
-app = FastAPI(lifespan=lifespan)
+app = FastAPI()
+# app = FastAPI(lifespan=lifespan)
 for router in routers:
     app.include_router(router)
 

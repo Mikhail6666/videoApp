@@ -15,7 +15,7 @@ class Base(DeclarativeBase):
 
 
 class VideoFiles(Base):
-    __tablename__ = "Main"
+    __tablename__ = "main"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
@@ -23,19 +23,36 @@ class VideoFiles(Base):
     status: Mapped[str]
 
 
-class CompleteFiles(Base):
-    __tablename__ = "Complete_files"
+class Violations(Base):
+    __tablename__ = "violations"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    main_id: Mapped[int] = mapped_column(ForeignKey("Main.id"))
+    main_id: Mapped[int] = mapped_column(ForeignKey("main.id"))
+    photo: Mapped[str]
+    video: Mapped[str]
+    category: Mapped[str]
+    confidence: Mapped[str]
+    date: Mapped[str]
+    time: Mapped[str]
+    camera: Mapped[str]
+    field: Mapped[str]
+    well_pad: Mapped[str]
+    color: Mapped[str]
+
+
+class CompleteFiles(Base):
+    __tablename__ = "complete_files"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    main_id: Mapped[int] = mapped_column(ForeignKey("main.id"))
     name_complete_file: Mapped[str]
     path_complete_file: Mapped[str]
 
 
 class CompletePngFiles(Base):
-    __tablename__ = "Complete_png_files"
+    __tablename__ = "complete_png_files"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    main_id: Mapped[int] = mapped_column(ForeignKey("Main.id"))
+    main_id: Mapped[int] = mapped_column(ForeignKey("main.id"))
     name_complete_png_file: Mapped[str]
     path_complete_png_file: Mapped[str]
