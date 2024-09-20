@@ -8,14 +8,12 @@ def process_and_stream_video(repo, video_file_id, violations_repository):
     model = YOLO("best.pt")
     video_file = repo.get_video_file(video_file_id)
     frame_info = []
-    results = model(video_file.file_path, stream=True, conf=0.3, iou=0.2)
+    results = model(video_file.file_path, stream=True, conf=0.3, iou=0.2, classes=[6])
     frame_counter = 0
     for result in results:
         for box in result.boxes:
-            cls = int(box.cls[0])
             conf = float(box.conf[0])
-            if cls == 6:
-                frame_info.append({"frame_number": frame_counter, "confidence": conf})
+            frame_info.append({"frame_number": frame_counter, "confidence": conf})
         frame_counter += 1
     if frame_info:
         frame_result = analyze_frames(frame_info)

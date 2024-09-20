@@ -28,7 +28,6 @@ def seconds_to_time(seconds):
 
 def calculate_frame_time(start_time_str, fps_str, frame_number):
     start_time_seconds = time_to_seconds(start_time_str)
-    # frame_number = int(frame_number_str)
     frame_time_seconds = start_time_seconds + (frame_number / fps_str)
     frame_time_str = seconds_to_time(frame_time_seconds)
     return frame_time_str
