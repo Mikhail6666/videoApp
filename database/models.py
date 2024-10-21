@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Any
 from sqlalchemy.orm import Mapped, mapped_column, declared_attr, DeclarativeBase
 from sqlalchemy import ForeignKey
@@ -32,8 +33,7 @@ class Violations(Base):
     video: Mapped[str]
     category: Mapped[str]
     confidence: Mapped[str]
-    date: Mapped[str]
-    time: Mapped[str]
+    datetime: Mapped[datetime]
     camera: Mapped[str]
     field: Mapped[str]
     well_pad: Mapped[str]

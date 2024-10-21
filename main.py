@@ -4,12 +4,14 @@ from fastapi.responses import RedirectResponse
 from handlers import routers
 import asyncio
 from database_videos.main_loop import main_loop
-from settings import FOLDER_VIDEOS
+import os
+folder_videos = os.getenv("FOLDER_VIDEOS")
+
 
 # @asynccontextmanager
 # async def lifespan(app: FastAPI):
 #     # Действия при старте приложения
-#     folder_path = FOLDER_VIDEOS
+#     folder_path = folder_videos
 #     asyncio.create_task(main_loop(folder_path))
 #     print("Приложение запущено")
 #     yield

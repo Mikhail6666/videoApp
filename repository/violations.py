@@ -1,8 +1,9 @@
-from sqlalchemy import select, delete, update
+from datetime import datetime
+from sqlalchemy import select, delete, update, func, case
 from sqlalchemy.orm import Session
-
 from database import Violations
 from schema import ViolationsSchema
+from typing import Dict
 
 
 class ViolationRepository:
@@ -21,6 +22,38 @@ class ViolationRepository:
                                                      ).scalar_one_or_none()
         return violation
 
+    def get_violations_from_time(self, start_date: datetime, end_date: datetime) -> list[ViolationsSchema]:
+        with self.db_session as session:
+            violations: list[ViolationsSchema] = session.execute(select(Violations)
+                                                                 .where(Violations.datetime >= start_date,
+                                                                        Violations.datetime <= end_date)).scalars().all()
+        return violations
+
+    def get_amount_violations_from_time(self, start_date: datetime, end_date: datetime) -> int:
+        with self.db_session as session:
+            results = session.execute(
+                select(
+                    func.sum(case((Violations.category == 'danger_zone', 1), else_=0)).label("danger_zone"),
+                    func.sum(case((Violations.category == 'glasses', 1), else_=0)).label("glasses"),
+                    func.sum(case((Violations.category == 'gloves', 1), else_=0)).label("gloves"),
+                    func.sum(case((Violations.category == 'helm', 1), else_=0)).label("helm"),
+                    func.sum(case((Violations.category == 'safety_rope', 1), else_=0)).label("safety_rope")
+                )
+                .where(Violations.datetime >= start_date, Violations.datetime <= end_date)
+            ).one()
+            return {
+                "danger_zone:": results.danger_zone,
+                "glasses:": results.glasses,
+                "gloves": results.gloves,
+                "helm": results.helm,
+                "safety_rope": results.safety_rope,
+                "total": results.danger_zone +
+                         results.glasses +
+                         results.gloves +
+                         results.helm +
+                         results.safety_rope
+            }
+
     def create_violation(self, violation: ViolationsSchema) -> int:
         violation_model = Violations(
             main_id=violation.main_id,
@@ -28,8 +61,7 @@ class ViolationRepository:
             video=violation.video,
             category=violation.category,
             confidence=violation.confidence,
-            date=violation.date,
-            time=violation.time,
+            datetime=violation.datetime,
             camera=violation.camera,
             field=violation.field,
             well_pad=violation.well_pad,
@@ -47,8 +79,7 @@ class ViolationRepository:
             video=violation.video,
             category=violation.category,
             confidence=violation.confidence,
-            date=violation.date,
-            time=violation.time,
+            datetime=violation.datetime,
             camera=violation.camera,
             field=violation.field,
             well_pad=violation.well_pad,

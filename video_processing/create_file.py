@@ -1,14 +1,15 @@
-import os
 import shutil
-from settings import UPLOAD_DIRECTORY
+import os
+upload_directory = os.getenv("UPLOAD_DIRECTORY")
+
 
 def create_file(file):
     try:
         # Создаем директорию, если она не существует
-        os.makedirs(UPLOAD_DIRECTORY, exist_ok=True)
+        os.makedirs(upload_directory, exist_ok=True)
 
         # Формируем полный путь для сохранения файла
-        file_location = os.path.join(UPLOAD_DIRECTORY, file.filename)
+        file_location = os.path.join(upload_directory, file.filename)
 
         # Открываем файл для записи в бинарном режиме
         with open(file_location, "wb+") as file_object:

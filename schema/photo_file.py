@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-class VideoFileSchema(BaseModel):
+class PhotoFileSchema(BaseModel):
     id: int | None = None
     name: str | None = None
     file_path: str | None = None
@@ -9,7 +9,7 @@ class VideoFileSchema(BaseModel):
     class Config:
         from_attributes = True
 
-class GetVideoFile(BaseModel):
+class GetPhotoFile(BaseModel):
     file_path: str | None = None
 
     class Config:

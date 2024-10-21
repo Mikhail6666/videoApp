@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 from pydantic import BaseModel
 
 class ViolationsSchema(BaseModel):
@@ -7,8 +10,7 @@ class ViolationsSchema(BaseModel):
     video: str | None = None
     category: str | None = None
     confidence: str | None = None
-    date: str | None = None
-    time: str | None = None
+    datetime: datetime
     camera: str | None = None
     field: str | None = None
     well_pad: str | None = None

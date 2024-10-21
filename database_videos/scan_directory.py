@@ -1,10 +1,11 @@
-import os
 from datetime import datetime
 import sqlite3
+import os
+video_archive_db = os.getenv("VIDEO_ARCHIVE_DB")
 
 
 def scan_directory(folder_path):
-    conn = sqlite3.connect('/home/mikhail/PycharmProjects/videoApp/video_archive.db')
+    conn = sqlite3.connect(video_archive_db)
     cursor = conn.cursor()
 
     for root, dirs, files in os.walk(folder_path):

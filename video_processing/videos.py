@@ -1,7 +1,8 @@
 from ultralytics import YOLO
 from video_processing.analyze_frames import analyze_frames
 from video_processing.extract_video_segments import extract_video_segments
-from settings import COMPLETE_FILES
+import os
+complete_files = os.getenv("COMPLETE_FILES")
 
 
 def process_and_stream_video(repo, video_file_id, violations_repository):
@@ -19,7 +20,7 @@ def process_and_stream_video(repo, video_file_id, violations_repository):
         frame_result = analyze_frames(frame_info)
         extract_video_segments(video_file.file_path,
                                frame_result,
-                               COMPLETE_FILES,
+                               complete_files,
                                video_file_id,
                                violations_repository)
     else:
