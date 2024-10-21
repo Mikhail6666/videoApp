@@ -41,17 +41,22 @@ class ViolationRepository:
                 )
                 .where(Violations.datetime >= start_date, Violations.datetime <= end_date)
             ).one()
+            danger_zone = results.danger_zone or 0
+            glasses = results.glasses or 0
+            gloves = results.gloves or 0
+            helm = results.helm or 0
+            safety_rope = results.safety_rope or 0
             return {
-                "danger_zone:": results.danger_zone,
-                "glasses:": results.glasses,
-                "gloves": results.gloves,
-                "helm": results.helm,
-                "safety_rope": results.safety_rope,
-                "total": results.danger_zone +
-                         results.glasses +
-                         results.gloves +
-                         results.helm +
-                         results.safety_rope
+                "danger_zone:": danger_zone,
+                "glasses:": glasses,
+                "gloves": gloves,
+                "helm": helm,
+                "safety_rope": safety_rope,
+                "total": danger_zone +
+                         glasses +
+                         gloves +
+                         helm +
+                         safety_rope
             }
 
     def create_violation(self, violation: ViolationsSchema) -> int:
