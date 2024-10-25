@@ -6,6 +6,7 @@ import asyncio
 from database_videos.main_loop import main_loop
 import os
 folder_videos = os.getenv("FOLDER_VIDEOS")
+from fastapi.middleware.cors import CORSMiddleware
 
 
 # @asynccontextmanager
@@ -21,6 +22,16 @@ folder_videos = os.getenv("FOLDER_VIDEOS")
 #     # Например, остановка задач, закрытие соединений и т.д.
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:8080",
+        "https://videoanalytics.driveintech.ru"
+    ],  # Разрешить запросы с localhost:8080
+    allow_credentials=True,
+    allow_methods=["*"],  # Разрешить все HTTP-методы (GET, POST и т.д.)
+    allow_headers=["*"],  # Разрешить все заголовки
+)
 # app = FastAPI(lifespan=lifespan)
 for router in routers:
     app.include_router(router)

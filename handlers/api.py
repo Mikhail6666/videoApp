@@ -20,8 +20,8 @@ async def get_list_of_events(start_date: datetime,
                     end_date: datetime,
                     violations_repository: Annotated[ViolationRepository, Depends(get_violation_repository)]):
     violations = violations_repository.get_violations_from_time(start_date, end_date)
-    if not violations:
-        raise HTTPException(status_code=404, detail="Violation not found")
+    # if not violations:
+    #     raise HTTPException(status_code=404, detail="Violation not found")
 
     return violations
 
