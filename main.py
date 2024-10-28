@@ -6,6 +6,7 @@ import asyncio
 from database_videos.main_loop import main_loop
 import os
 folder_videos = os.getenv("FOLDER_VIDEOS")
+origins = os.getenv("CORS_ORIGINS", "").split(",")
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -24,11 +25,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:8080",
-        "https://videoanalytics.driveintech.ru",
-        "https://ns.driveintech.ru"
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],  # Разрешить все HTTP-методы (GET, POST и т.д.)
     allow_headers=["*"],  # Разрешить все заголовки
