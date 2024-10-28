@@ -17,9 +17,9 @@ router = APIRouter(prefix="/api", tags=["api"])
             summary="Список нарушений",
             description="Получение полного списка нарушений")
 async def get_list_of_events(start_date: datetime,
-                    end_date: datetime,
+                    end_date: datetime,sn: int,
                     violations_repository: Annotated[ViolationRepository, Depends(get_violation_repository)]):
-    violations = violations_repository.get_violations_from_time(start_date, end_date)
+    violations = violations_repository.get_violations_from_time(start_date, end_date, sn)
     # if not violations:
     #     raise HTTPException(status_code=404, detail="Violation not found")
 

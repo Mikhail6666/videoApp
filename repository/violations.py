@@ -22,11 +22,12 @@ class ViolationRepository:
                                                      ).scalar_one_or_none()
         return violation
 
-    def get_violations_from_time(self, start_date: datetime, end_date: datetime) -> list[ViolationsSchema]:
+    def get_violations_from_time(self, start_date: datetime, end_date: datetime, sn: int) -> list[ViolationsSchema]:
         with self.db_session as session:
             violations: list[ViolationsSchema] = session.execute(select(Violations)
                                                                  .where(Violations.datetime >= start_date,
-                                                                        Violations.datetime <= end_date)).scalars().all()
+                                                                        Violations.datetime <= end_date,
+                                                                        Violations.sn == sn)).scalars().all()
         return violations
 
     def get_amount_violations_from_time(self, start_date: datetime, end_date: datetime) -> int:

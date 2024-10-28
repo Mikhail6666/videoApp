@@ -38,6 +38,7 @@ class Violations(Base):
     field: Mapped[str]
     well_pad: Mapped[str]
     color: Mapped[str]
+    sn: Mapped[int]
 
 
 class CompleteFiles(Base):

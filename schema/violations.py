@@ -15,6 +15,7 @@ class ViolationsSchema(BaseModel):
     field: str | None = None
     well_pad: str | None = None
     color: str | None = None
+    sn: int | None = None
 
     class Config:
         from_attributes = True
