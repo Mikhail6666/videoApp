@@ -26,7 +26,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:8080",
-        "https://videoanalytics.driveintech.ru"
+        "https://videoanalytics.driveintech.ru",
+        "https://ns.driveintech.ru/"
     ],  # Разрешить запросы с localhost:8080
     allow_credentials=True,
     allow_methods=["*"],  # Разрешить все HTTP-методы (GET, POST и т.д.)
