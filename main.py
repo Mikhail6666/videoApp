@@ -27,8 +27,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:8080",
         "https://videoanalytics.driveintech.ru",
-        "https://ns.driveintech.ru/"
-    ],  # Разрешить запросы с localhost:8080
+        "https://ns.driveintech.ru"
+    ],
     allow_credentials=True,
     allow_methods=["*"],  # Разрешить все HTTP-методы (GET, POST и т.д.)
     allow_headers=["*"],  # Разрешить все заголовки
