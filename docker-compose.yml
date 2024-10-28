@@ -18,6 +18,7 @@ services:
       UPLOAD_DIRECTORY: ${UPLOAD_DIRECTORY}
       COMPLETE_FILES: ${COMPLETE_FILES}
       FOLDER_VIDEOS: ${FOLDER_VIDEOS}
+      CORS_ORIGINS: ${CORS_ORIGINS}
 
   nginx:
     image: nginx:alpine
